@@ -2,4 +2,4 @@
 # Prueba simple de Hello World con Jenkins
 #-----------------------------------------------
 
-echo "Hello World"
+echo "Hello World!"
