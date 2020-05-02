@@ -5,11 +5,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Comprobar repo GITHUB') {
-            steps {
-                git poll: true, url: 'https://github.com/isx46410800/M14_Jenkins.git'
-            }
-        }
         stage('Construimos imagen Docker-ApacheServer') {
             steps {
                 docker build -t isx46410800/apache:jenkins .
