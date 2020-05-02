@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Comprobar repo GITHUB') {
             steps {
-                git poll: true, url: 'git@github.com:isx46410800/M14_Jenkins.git'
+                git poll: true, url: 'https://github.com/isx46410800/M14_Jenkins.git'
             }
         }
         stage('Construimos imagen Docker-ApacheServer') {
@@ -20,7 +20,7 @@ pipeline {
                 docker run --rm --name apache1 -h apache1 -p 80:80 -d isx46410800/apache:jenkins
             }
         }
-	 stage('Desplegamos container con apache-server2') {
+	stage('Desplegamos container con apache-server2') {
             steps {
                 docker run --rm --name apache2 -h apache2 -p 80:80 -d isx46410800/apache:jenkins
             }
