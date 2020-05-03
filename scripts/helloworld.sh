@@ -1,5 +1,5 @@
 #!/bin/bash
-# Prueba simple de Hello World con Jenkins
-#-----------------------------------------------
+# Prueba simple(build) de Hello World con Jenkins
+#------------------------------------------------
 
 echo "Hello World!"
