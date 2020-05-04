@@ -10,7 +10,7 @@ pipeline {
       stage('Construimos imagen apache docker'){
           steps{
             sh '''
-              docker build -t isx46410800/apache:jenkins .
+              docker build -t isx46410800/apache:jenkins apache/.
             '''
           }
       }
@@ -31,14 +31,14 @@ pipeline {
       stage('Integramos index.html en apache1'){
           steps{
             sh '''
-              docker cp apache/index1.html apache1:/var/www/html/.
+              docker cp ./apache/index1.html apache1:/var/www/html/.
             '''
           }
       }
       stage('Integramos index.html en apache2'){
           steps{
             sh '''
-              docker cp apache/index2.html apache2:/var/www/html/.
+              docker cp ./apache/index2.html apache2:/var/www/html/.
             '''
           }
       }
