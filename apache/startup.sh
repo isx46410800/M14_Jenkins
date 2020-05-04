@@ -1,2 +1,2 @@
 #! /bin/bash
-/usr/sbin/httpd -DFOREGROUND
+/usr/sbin/apache2ctl -D FOREGROUND

@@ -8,4 +8,4 @@ COPY * /opt/docker/
 RUN chmod +x /opt/docker/startup.sh
 WORKDIR /opt/docker
 EXPOSE 80
-CMD [ "/opt/docker/startup.sh" ]
+CMD [ "/usr/sbin/apache2ctl", "-DFOREGROUND" ]
