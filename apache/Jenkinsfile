@@ -31,14 +31,14 @@ pipeline {
       stage('Integramos index.html en apache1'){
           steps{
             sh '''
-              docker cp index1.html apache1:/var/www/html/.
+              docker cp apache/index1.html apache1:/var/www/html/.
             '''
           }
       }
       stage('Integramos index.html en apache2'){
           steps{
             sh '''
-              docker cp index2.html apache2:/var/www/html/.
+              docker cp apache/index2.html apache2:/var/www/html/.
             '''
           }
       }
