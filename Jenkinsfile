@@ -24,7 +24,7 @@ pipeline {
       stage('Commit de la imagen para DockerHub'){
           steps{
             sh '''
-              docker commit appflask isx46410800/appflask:jenkins
+              docker committ appflask isx46410800/appflask:jenkins
             '''
           }
       }
