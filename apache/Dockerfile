@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 LABEL author="@Miguel Amoros"
-LABEL description="Server Apache para Jenkins"
+LABEL description="Ubuntu con Server Apache para Jenkins"
 RUN apt-get update -y
 RUN apt-get install -y apache2 telnet
 RUN mkdir /opt/docker

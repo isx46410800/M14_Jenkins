@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 LABEL author="@Miguel Amoros"
-LABEL description="Fedora para App Flask desplegado en Docker, Jenkins"
+LABEL description="Ubuntu para App Flask desplegado en Docker, Jenkins"
 RUN apt-get update -y
 RUN apt-get install -y python python-pip 
 RUN mkdir /opt/docker
