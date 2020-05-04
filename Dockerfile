@@ -1,7 +1,8 @@
-FROM fedora:27
+FROM ubuntu:16.04
 LABEL author="@Miguel Amoros"
 LABEL description="Fedora para App Flask, Jenkins"
-RUN dnf install -y python python-pip 
+RUN apt-get update -y
+RUN apt-get install -y python python-pip 
 RUN mkdir /opt/docker
 COPY * /opt/docker/
 RUN pip install -r /opt/docker/requisitos.txt
