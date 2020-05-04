@@ -1,8 +1,7 @@
 FROM fedora:27
 LABEL author="@Miguel Amoros"
 LABEL description="Server Apache para Jenkins"
-RUN dnf update -y
-RUN dnf -y install httpd telnet vim tree 
+RUN dnf -y install httpd telnet
 RUN mkdir /opt/docker
 COPY * /opt/docker/
 RUN chmod +x /opt/docker/startup.sh
