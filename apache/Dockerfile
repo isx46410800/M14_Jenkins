@@ -1,4 +1,4 @@
-FROM fedora:27
+FROM fedora:29
 LABEL author="@Miguel Amoros"
 LABEL description="Server Apache para Jenkins"
 RUN dnf -y install httpd telnet
