@@ -1,4 +1,4 @@
-//Creacion de un pipeline con diferentes jobs. Meter un index.html a dos server apache en docker
+//Creacion de un pipeline con diferentes jobs. Desplegar la app flask en un container docker
 pipeline {
   agent any
   stages {
