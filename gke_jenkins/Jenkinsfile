@@ -2,10 +2,9 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'jenkins-gke-276223'
+        CLUSTER_NAME = 'cluster-jenkins-1'
         LOCATION = 'us-east4-a'
         CREDENTIALS_ID = 'gke'
-        CLUSTER_NAME_TEST = 'cluster-jenkins-test'
-        CLUSTER_NAME_PROD = 'cluster-jenkins-1'
     }
     stages {
         stage("Checkout code") {
@@ -29,18 +28,12 @@ pipeline {
                     }
                 }
             }
-        }       
-        stage('Deploy to GKE test cluster') {
+        }        
+        stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_TEST, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }
-        stage('Deploy to GKE production cluster') {
-            steps{
-                input message:"Proceed with final deployment?"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_PROD, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-            }
-        }
-    }
+    }    
 }
