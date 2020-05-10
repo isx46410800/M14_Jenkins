@@ -147,13 +147,125 @@ Jenkins puede extenderse mediante plugins . Actualmente hay una gran cantidad de
 Para llevar a cabo una mejor compresión del funcionamiento de Jenkins, se ha realizado una serie de ejercicios prácticos.
 
 <a name="id31"></a>
-## __3.1. Ejercicio 1__
+## __3.1. Ejercicio 1: HelloWorld_test-1__  
+En este primer ejercicio básico con Jenkins, lo que hacemos es coger el código fuente de nuestro git, el cual será un simple script con el texto de _"Hello World"_.  
+
++ En Jenkins, iremos a `New Item - Freestyle project` y le indicaremos el nombre de nuestra prueba_ _"HelloWorld_test-1"._
+
++ En su configuración lo que haremos será indicar a Jenkins que va a ser un proyecto de `Github`, el cual indicaremos la url de nuestro GIT.
+
++ Después en la parte de código fuente, indicaremos cual es la url de nuestro repositorio el cual vaya a compilar el código.
+![](capturas/helloworld_test1_2.png)  
+
++ Lo que querremos luego es que Jenkins haga algo, y le indicaremos en la opción de `BUILD`, que construya algo, y indicaremos que ejecute el script indicándole la ruta.
+![](capturas/helloworld_test1_3.png)  
+
++ Guardamos nuestra prueba y miramos que funcione.
+
++ A la izquierda nos sale un historial de los builds de nuestro proyecto, si sale la bolita azul es que todo ha ido bien. En cambio, si sale rojo, es que hay algun fallo.  
+![](capturas/helloworld_test1_1.png)  
+
++ Podemos ver los logs clicandole a nuestro número de item tanto para ver los que funcionan como los que no.
+En la opción `console output` vemos todo lo que va haciendo Jenkins y donde falla. Si no falla termina con un SUCCESS.
+
++ Aquí hacemos un ejemplo válido y otro erróneo poniendo mal el archivo a ejecutar.
+![](capturas/helloworld_test1_4.png)  
+> Éste es el caso en que todo ha funcionado correctamente e indica el estado de SUCCESS.
+
+  ![](capturas/helloworld_test1_5.png)  
+  > Éste es el caso en que ha fallado e indica el estado de FAILURE por no encontrar el archivo indicado en la url del repositorio.
 
 <a name="id32"></a>
-## __3.2. Ejercicio 2__
+## __3.2. Ejercicio 2: HelloWorld-appFlask_test2__
+En este segundo ejercicio será una copia del anterior. No obstante, en este caso, el script de _Hello World_ será transformado en una `aplicación web Flask`.
+
+Flask es un micro Framework escrito en Python y concebido para facilitar el desarrollo de Aplicaciones Web bajo el patrón MVC.  
+
+![](capturas/appflask_test2_1.png)  
+
+Para ello, también utilizaremos la herramienta `virtualenv`. _Virtualenv_ es una herramienta de desarrollo en Python escrita por Ian Bicking y usada para crear entornos aislados para Python, en los que es posible instalar paquetes sin interferir con otros virtualenvs ni con los paquetes de Python del sistema.  
+
+También, en este proceso de creación de la app en flask, utilizaremos un test de prueba para que la aplicación se pueda ejecutar si cumple con el test. Si no pasa el test, el proceso fallará. Este test lo haremos con la herramienta `pytest`, que es un marco de pruebas que nos permite escribir códigos de prueba usando python.  
+
+Seguiremos los mismos pasos que el ejercicio 1 pero el `BUILD` lo construiremos de manera diferente.  
+
++ Indicamos de nuevo la url del proyecto y la url del repositorio.  
+![](capturas/appflask_test2_2.png)  
+
++ Hacemos el build de construir el script en app flask en un entorno virual, con los módulos que se instalan al crear el entorno virtual y finalmente ejecutar la app si pasa el test de prueba creado.  
+![](capturas/appflask_test2_3.png)  
+
++ Guardamos y ejecutamos el build.  
+
++ <u>Primer fallo:</u> no tenemos instalado en nuestra instancia de Amazon el paquete de virtualenv. Lo instalamos para pasar este error con:  
+`[fedora@ip-172-31-92-65 ~]$ sudo dnf install -y python-pip`  
+`[fedora@ip-172-31-92-65 ~]$ sudo pip install virtualenv`  
+![](capturas/appflask_test2_4.png)  
+
++ <u>Segundo fallo:</u> no hemos puesto bien la orden de instalar los módulos necesarios del entorno virual para hacer la app flask. Lo corregimos poniendo `pip install -r requisitos.txt`:  
+![](capturas/appflask_test2_7.png)  
+> Nota: para saber los requisitos, la prueba se hizo en local antes y con la orden siguiente, metidos los módulos en un fichero:  
+```
+(entorno_virtual) [isx46410800@miguel M14_Jenkins]$ pip freeze
+(entorno_virtual) [isx46410800@miguel M14_Jenkins]$ pip freeze > requisitos.txt
+```
+
++ En el siguiente build ya vemos que todo ha salido perfecto con el mensaje de _SUCCESS_ y que la app está _running_ en la dirección ip y puerto indicado.  
+![](capturas/appflask_test2_8.png)  
 
 <a name="id33"></a>
-## __3.3. Ejercicio 3__
+## __3.3. Ejercicio 3: HelloWorld-appFlask-Docker_test3__  
+Este tercer ejercicio es una continuación del primer y segundo pero, en este caso, la aplicación flask será desplegada en un `container Docker` con la respectiva imagen subida a `DockerHub` para que cualquier persona pueda hacer un pull de ella siempre que quiera.  
+
+![](capturas/appflaskDocker_test3_1.png)  
+
+En este caso se utiliza un ubuntu para la construcción del container Docker. Después arrancaremos el container y lo subiremos a dockerHUB. Para finalizar, una vez pasada la stage de que se queda funcionando en el container, lo pararemos y se borrará la imagen para que no falle al hacer otro build y no haya nada en el sistema.  
+
++ Indicamos de nuevo la url del proyecto y la url del repositorio.  
+![](capturas/appflaskDocker_test3_2.png)  
+
++ En la sección de `BUILD` ponemos el proceso que hemos indicado en la explicación inicial de este ejercicio 3.  
+![](capturas/appflaskDocker_test3_3.png)  
+> NOTA: añadimos que se borre el workspace antes de empezar todo. El workspace es el espacio de trabajo dónde se descarga las cosas para trabajar. Además tambien ponemos que vaya testeando el repositorio cada 5 minutos, para cuando hay cambios, haga otro build automáticamente.
+```
+Build Environment -> ￼Delete workspace before build starts
+Poll SCM -> Poll SCM H/5 * * * *
+```
+
++ <u>Primer fallo:</u> ya se estaba escuchando por ese puerto. Quitamos el `-p 5000:5000`.  
+![](capturas/appflaskDocker_test3_4.png)  
+
++ <u>Segundo fallo:</u> falta elementos en la orden del `docker push`. Lo corregimos indicando bien el elemento a subir `docker push isx46410800/appflask:jenkins`.  
+![](capturas/appflaskDocker_test3_5.png)  
+
++ <u>Tercer fallo:</u> al hacer otro build, existe el container encendido del anterior fallo. Lo paramos manualmente.  
+![](capturas/appflaskDocker_test3_6.png)  
+
++ <u>Cuarto fallo:</u> error al subir la imagen a `DockerHub` por fallo de autenticación. Lo corregimos haciendo `docker login` y creando el archivo en el usuario de `Jenkins`:  
+```
+[fedora@ip-172-31-92-65 ~]$ docker login
+Authenticating with existing credentials...
+WARNING! Your password will be stored unencrypted in /home/fedora/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+Login Succeeded
+```
+```
+[fedora@ip-172-31-92-65 ~]$ sudo vim /etc/group
+> ponemos jenkins solo como user de docker
+[fedora@ip-172-31-92-65 ~]$ sudo mkdir /var/lib/jenkins/.docker
+[fedora@ip-172-31-92-65 ~]$ sudo chown jenkins.jenkins /var/lib/jenkins/.docker
+[fedora@ip-172-31-92-65 ~]$ sudo cp /home/fedora/.docker/config.json /var/lib/jenkins/.docker/.
+[fedora@ip-172-31-92-65 ~]$ sudo chown jenkins.jenkins /var/lib/jenkins/.docker/*
+```
+![](capturas/appflaskDocker_test3_7.png)  
+
++ <u>Quinto fallo:</u> error al borrar la imagen. Lo corregimos forzando el borrado con `docker rmi -f isx46410800/appflask:jenkins`.  
+![](capturas/appflaskDocker_test3_8.png)  
+
++ Finalmente, al hacer otro build ya nos sale todo el proceso con `SUCCESS`.
+![](capturas/appflaskDocker_test3_9.png)  
+![](capturas/appflaskDocker_test3_10.png)  
 
 <a name="id34"></a>
 ## __3.4. Ejercicio 4__
