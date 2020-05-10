@@ -268,7 +268,29 @@ Login Succeeded
 ![](capturas/appflaskDocker_test3_10.png)  
 
 <a name="id34"></a>
-## __3.4. Ejercicio 4__
+## __3.4. Ejercicio 4: pipeline-jenkinsfile_test2__  
+Éste va a ser el primer ejemplo con Pipeline. Un pipeline se compone de diferentes jobs los cuales lo vamos asignando en diferentes stages en un archivo _Jenkinsfile_. Éste es el fichero que leerá Jenkins para construir su _Pipeline_. Será el mismo ejemplo que el anterior pero transformado en un pipeline.  
+
+![](capturas/pipeline_flaskDocker_1.png)  
+
++ Creamos el pipeline yendo a `new item - pipeline multibranch`
+![](capturas/pipeline_flaskDocker_0.png)  
+
++ Indicamos de nuevo la url del proyecto y la url del repositorio.  
+
++ En la sección de `build configuration` indicamos que sea `by Jenkinsfile` y ponemos la ruta del archivo.  
+![](capturas/pipeline_flaskDocker_2.png)  
+
++ En la sección `Scan Multibranch Pipeline Triggers` indicamos ``￼Periodically if not otherwise run` y la opción `Interval 5minutes`.  
+![](capturas/pipeline_flaskDocker_3.png)  
+> Ésto hace que escanea nuestro repositorio cada 5minutos, y si ve cambios, vuelve a construir automáticamente el pipeline.
+
++ Guardamos cambios.  
+
++ Vemos una imagen de nuestros pipelines de este ejemplo. Nos salé _SUCCESS_ cuando ha salido correctamente todo y _FAILURE_ en el que hemos escrito mal la orden _commit_ para que nos saliera un fallo y verlo.  
+![](capturas/pipeline_flaskDocker_4.png)  
+![](capturas/pipeline_flaskDocker_5.png)  
+![](capturas/pipeline_flaskDocker_6.png)  
 
 <a name="id35"></a>
 ## __3.5. Ejercicio 5__
