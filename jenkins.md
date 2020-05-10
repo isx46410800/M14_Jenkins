@@ -12,11 +12,11 @@
     2.4. [Jenkinsfile](#id24)  
     2.5. [Plugins](#id25)  
 3. [Ejercicios prácticos](#id3)  
-    3.1. [Ejemplo 01](#id31)  
-    3.2. [Ejemplo 02](#id32)  
-    3.3. [Ejemplo 03](#id33)  
-    3.4. [Ejemplo 04](#id34)  
-    3.5. [Ejemplo 05](#id35)  
+    3.1. [Ejemplo 1: HelloWorld_test-1](#id31)  
+    3.2. [Ejemplo 2: HelloWorld-appFlask_test2](#id32)  
+    3.3. [Ejemplo 3: HelloWorld-appFlask-Docker_test3](#id33)  
+    3.4. [Ejemplo 4: pipeline-jenkinsfile_test2](#id34)  
+    3.5. [Ejemplo 5: pipeline-jenkinsfile-apache_test3](#id35)  
     3.6. [Ejemplo 06](#id36)  
 
 <a name="id1"></a>
@@ -281,19 +281,46 @@ Login Succeeded
 + En la sección de `build configuration` indicamos que sea `by Jenkinsfile` y ponemos la ruta del archivo.  
 ![](capturas/pipeline_flaskDocker_2.png)  
 
-+ En la sección `Scan Multibranch Pipeline Triggers` indicamos ``￼Periodically if not otherwise run` y la opción `Interval 5minutes`.  
++ En la sección `Scan Multibranch Pipeline Triggers` indicamos `￼Periodically if not otherwise run` y la opción `Interval 5minutes`.  
 ![](capturas/pipeline_flaskDocker_3.png)  
 > Ésto hace que escanea nuestro repositorio cada 5minutos, y si ve cambios, vuelve a construir automáticamente el pipeline.
 
 + Guardamos cambios.  
 
-+ Vemos una imagen de nuestros pipelines de este ejemplo. Nos salé _SUCCESS_ cuando ha salido correctamente todo y _FAILURE_ en el que hemos escrito mal la orden _commit_ para que nos saliera un fallo y verlo.  
++ Vemos una imagen de nuestros pipelines de este ejemplo. Nos sale _SUCCESS_ cuando ha salido correctamente todo y _FAILURE_ en el que hemos escrito mal la orden _commit_ para que nos saliera un fallo y verlo.  
 ![](capturas/pipeline_flaskDocker_4.png)  
 ![](capturas/pipeline_flaskDocker_5.png)  
 ![](capturas/pipeline_flaskDocker_6.png)  
 
 <a name="id35"></a>
-## __3.5. Ejercicio 5__
+## __3.5. Ejercicio 5: pipeline-jenkinsfile-apache_test3__  
+En este ejemplo construimos de nuevo un pipeline. En éste vamos a crear dos servidores apache en containers Docker y vamos a ponerle un index.html diferente a cada uno. La imagen global del servidor apache será subida a Dockerhub. Una vez que vemos que ha funcionado todo, pararemos los containers y borraremos todo lo creado.  
+
+![](capturas/pipeline_apache_2.png)  
+
++ Creamos el pipeline yendo a `new item - pipeline multibranch`
+
++ Indicamos de nuevo la url del proyecto y la url del repositorio.   
++ En la sección de `build configuration` indicamos que sea `by Jenkinsfile` y ponemos la ruta del archivo.  
++ En la sección `Scan Multibranch Pipeline Triggers` indicamos `￼Periodically if not otherwise run` y la opción `Interval 5minutes`.  
+![](capturas/pipeline_apache_1.png)  
+
++ Guardamos cambios.  
+
++ Vemos una imagen de nuestros pipelines de este ejemplo.  
+![](capturas/pipeline_apache_3.png)  
+
++ <u>Primer fallo:</u> error de que no encuentra el docker porque no se queda detached. Lo corregimos en el fichero `Dockerfile` con `CMD [ "/usr/sbin/apache2ctl", "-DFOREGROUND" ]`  
+![](capturas/pipeline_apache_4.png)  
+
++ <u>Segundo fallo:</u> error porque ya estaba encendido el container por el anterior build. Lo pararemos manualmente.  
+![](capturas/pipeline_apache_5.png)  
+
++ <u>Tercer fallo:</u> error porque no estamos haciendo commit del container correcto, no es appflask sino apache1.  
+![](capturas/pipeline_apache_6.png)  
+
++ Ahora ya todo `SUCCESS`.  
+![](capturas/pipeline_apache_7.png)  
 
 <a name="id36"></a>
 ## __3.6. Ejercicio 6__
