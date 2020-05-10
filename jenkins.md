@@ -333,7 +333,7 @@ Nuestro Jenkins cloud de Bitnami interactuará con `GKE(Google Kubernetes Engine
 
 Kubernetes (referido en inglés comúnmente como “K8s”) es un sistema de código libre para la automatización del despliegue, ajuste de escala y manejo de aplicaciones en contenedores​ que fue originalmente diseñado por Google y donado a la Cloud Native Computing Foundation (parte de la Linux Foundation). Soporta diferentes entornos para la ejecución de contenedores, incluido Docker.
 
-En resumen, lo que haremos desde nuestro server cloud Jenkins en Bitnami en este ejercicio será coger el código de nuestro repositorio git, crearemos un container Docker con la imagen de un script HelloWorld y lo desplegaremos primero en un clúster test de Kubernetes(GKE) y si ha salido bien, desplegarlo en el clúster real de producción.
+En resumen, lo que haremos desde nuestro server cloud Jenkins en Bitnami en este ejercicio será coger el código de nuestro repositorio git, crearemos un container Docker con la imagen de un script HelloWorld y lo desplegaremos primero en un clúster de Kubernetes(GKE).  
 
 Seguiremos todos estos pasos:  
 
@@ -435,10 +435,8 @@ sudo apt-get install kubectl
 
   ![](capturas/bitnami_30.png)  
 
-+ Ahora crearemos dos clústers en GKE, uno para test y otro para producción real. Iremos a `Compute - Kubernetes Engine - Clústeres - Crear Clúster`
++ Ahora crearemos el clúster en GKE. Iremos a `Compute - Kubernetes Engine - Clústeres - Crear Clúster`
 ![](capturas/gke_22.png)  
-![](capturas/gke_30.png)  
-![](capturas/gke_31.png)  
 
 + Para agregar a la instancia Bitnami Jenkins la configuración del cluster a la herramienta kubectl se ha de hacer:
     + Instalamos la SDK de cloud:  
@@ -462,11 +460,9 @@ sudo apt-get install kubectl
     ```
     + Nos autenticamos con lo creado en GKE en la máquina Bitnami con la orden `gcloud auth login`.
 
-+ Para conectar con la configuración de cada  cluster a la máquina:  
++ Para conectar con la configuración del clúster a la máquina:  
 `sudo gcloud container clusters get-credentials cluster-jenkins-1 --zone us-east4-a --project jenkins-gke-276223`  
 ![](capturas/gke_32.png)  
-`sudo gcloud container clusters get-credentials cluster-jenkins-test --zone us-east4-a --project jenkins-gke-276223`  
-![](capturas/gke_33.png)  
 > Estas órdenes la obtenemos al darle a conectar en cada clúster y nos indica la orden a conectar o copiar en nuestra máquina.
 
 ![](capturas/bitnami_31.png)
@@ -491,20 +487,26 @@ root@bitnami-jenkins-b106:~/.docker# chmod 777 /root/.docker/
 root@bitnami-jenkins-b106:~/.docker# chmod 777 /root/
 root@bitnami-jenkins-b106:~/.docker# chmod 777 /var/run/docker.sock
 ```
+![](capturas/bitnami_14.png)   
+![](capturas/bitnami_15.png)   
 
 + <u>Segundo error:</u> Fallo en el fichero deployment.yaml. Solución: identar bien el archivo.
+![](capturas/bitnami_16.png)   
 
-+ Vemos que todo el pipeline ya está en SUCCESS. Correctamente en el clúster de test y en el de producción. Comprobamos con las siguientes órdenes:
++ Vemos que el deploy en el GKE funciona ya. Todo el pipeline ya está en SUCCESS.  
+![](capturas/bitnami_17.png)   
+![](capturas/bitnami_18.png)   
 
-+ vemos el deploy y los servicios
-root@bitnami-jenkins-b106:~/.kube# kubectl get deployments
-root@bitnami-jenkins-b106:~/.kube# kubectl get services
++ Comprobamos con las siguientes órdenes:
 
-# lista de los nodos del cluster
-kubectl get nodes
++ Vemos el deploy y los servicios
+`root@bitnami-jenkins-b106:~/.kube# kubectl get deployments`  
+`root@bitnami-jenkins-b106:~/.kube# kubectl get services`  
+![](capturas/bitnami_19.png)   
+![](capturas/bitnami_20.png)   
 
-# eliminar servicio
-kubectl delete service hello-world  
++ Para lista de los nodos del cluster se usa `kubectl get nodes`.  
 
-# eliminar deployment
-kubectl delete deployment hello-world  
++ Para eliminar un servicio `kubectl delete service hello-world`.  
+
++ Para eliminar un deployment `kubectl delete deployment hello-world`.  
