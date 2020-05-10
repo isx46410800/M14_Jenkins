@@ -10,7 +10,7 @@ pipeline {
       stage('Construimos imagen docker'){
           steps{
             sh '''
-              docker build -t isx46410800/appflask:jenkins .
+              docker build -t isx46410800/appflask:jenkins app_flask/.
             '''
           }
       }
