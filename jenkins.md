@@ -512,26 +512,51 @@ También en esta ampliación lo que haremos será instalar el plugin `Blue Ocean
 Seguimos los siguientes pasos:  
 
 + Instalamos el plugin `Blue Ocean`:  
+![](capturas/ocean1.png)  
+![](capturas/ocean2.png)  
+![](capturas/ocean3.png)  
+![](capturas/ocean4.png)  
 
++ Creamos el `clúster de test` en GKE:  
+![](capturas/gke_30.png)  
+![](capturas/gke_31.png)  
 
-+ Creamos el clúster de test en GKE:  
-
-+ Importamos la configuración del clúster en nuestra máquina Bitnami Jenkins:  
++ Importamos la `configuración del clúster` en nuestra máquina Bitnami Jenkins:  
 `sudo gcloud container clusters get-credentials cluster-jenkins-test --zone us-east4-a --project jenkins-gke-276223`  
-![](capturas/gke_33.png)  
-> Estas órdenes la obtenemos al darle a conectar en cada clúster y nos indica la orden a conectar o copiar en nuestra máquina.
+![](capturas/bitnami_31.png)  
+![](capturas/bitnami_32.png)
 
-+ Modificamos la versión del Jenkinsfile añadiendo la línea de deploy en clúster test:  
++ Modificamos la versión del `Jenkinsfile` añadiendo la línea de deploy en clúster test:  
+El nuevo fichero [Jenkinsfile](gke_jenkins/Jenkinsfile) para la construcción del pipeline.  
 
-+ Vemos el resultado en Jenkins y en la interfaz de Blue Ocean:  
++ Vemos el `resultado` en Jenkins y en la interfaz de Blue Ocean:  
 > Nota: también se tuvo los fallos de credenciales y permisos que se soluciona como se indicó más arriba.
 
-+ Escalamos en nuestra máquina el servicio de Hello en el clúster de producción:  
+![](capturas/bitnami_34.png)  
+![](capturas/bitnami_35.png)  
+![](capturas/bitnami_36.png)  
 
-+ Vemos también el deploy en GKE:  
++ Vemos en la `interfaz de Blue Ocean` cómo se ve el pipeline y los logs de cada paso:  
+![](capturas/ocean5.png)  
+![](capturas/ocean6.png)  
+![](capturas/ocean7.png)  
+![](capturas/ocean8.png)  
+![](capturas/ocean9.png)  
+![](capturas/ocean10.png)  
+![](capturas/ocean11.png)  
 
-+ Para lista de los nodos del cluster se usa `kubectl get nodes`.  
++ Vemos como podemos `escalar` desde nuestra máquina el servicio de Hello en el clúster de producción:  
+![](capturas/bitnami_38.png)  
+![](capturas/bitnami_40.png)  
 
-+ Para eliminar un servicio `kubectl delete service hello-world`.  
++ Vemos también el `deploy en GKE`:  
+![](capturas/bitnami_39.png)  
 
-+ Para eliminar un deployment `kubectl delete deployment hello-world`.  
++ Para lista de los nodos del cluster se usa `kubectl get nodes`:  
+![](capturas/bitnami_43.png)  
+
++ Para eliminar un servicio `kubectl delete service hello-world`:  
+![](capturas/bitnami_41.png)  
+
++ Para eliminar un deployment `kubectl delete deployment hello-world`:  
+ ![](capturas/bitnami_42.png)  
