@@ -549,6 +549,9 @@ El nuevo fichero [Jenkinsfile](gke_jenkins/Jenkinsfile) para la construcción de
 ![](capturas/bitnami_38.png)  
 ![](capturas/bitnami_40.png)  
 
++ Comprobamos el servicio con su correspondiente IP `34.86.30.165:5000`:  
+![](capturas/bitnami_44.png)  
+
 + Vemos también el `deploy en GKE`:  
 ![](capturas/bitnami_39.png)  
 
