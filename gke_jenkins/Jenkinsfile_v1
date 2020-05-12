@@ -3,7 +3,6 @@ pipeline {
     environment {
         PROJECT_ID = 'jenkins-gke-276223'
         CLUSTER_NAME = 'cluster-jenkins-1'
-	CLUSTER_TEST = 'cluster-jenkins-test'
         LOCATION = 'us-east4-a'
         CREDENTIALS_ID = 'gke'
     }
@@ -29,13 +28,7 @@ pipeline {
                     }
                 }
             }
-        }    
-    	stage('Deploy to GKE test') {
-            steps{
-                sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_TEST, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-            }
-        }
+        }        
         stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"

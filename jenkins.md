@@ -477,7 +477,7 @@ sudo apt-get install kubectl
     + Creamos el [server.js](gke_jenkins/server.js) para que la aplicación devuelva un mensaje de "Hello World" al acceder.  
     + Creamos el [deployment.yaml](./deployment.yaml) para hacer el despliegue de nuestro contenedor en GKE.  
     + Creamos el [Dockerfile](gke_jenkins/Dockerfile) para construir el contenedor con el HelloWorld.  
-    + Creamos el [Jenkinsfile](gke_jenkins/Jenkinsfile) para la construcción del pipeline.  
+    + Creamos el [Jenkinsfile](gke_jenkins/Jenkinsfile_v1) para la construcción del pipeline.  
     > y al subir todo directamente nos creará el pipeline en Jenkins!
 
 + <u>Primer error:</u> Fallo en las credenciales con DockerHub. Solución:  
@@ -504,6 +504,31 @@ root@bitnami-jenkins-b106:~/.docker# chmod 777 /var/run/docker.sock
 `root@bitnami-jenkins-b106:~/.kube# kubectl get services`  
 ![](capturas/bitnami_19.png)   
 ![](capturas/bitnami_20.png)   
+
+### AMPLIACIÓN
+Ahora para completar más el ejercicio vamos a crear otro clúster para test. Con ello, haremos que antes de hacer el deploy en el clúster de producción, se haga antes en el test, y si todo funciona, se hará en el de producción. Lo veremos todo en el pipeline.  
+También en esta ampliación lo que haremos será instalar el plugin `Blue Ocean`. Blue Ocean sirve para mejorar la experiencia del usuario de Jenkins con una nueva interfaz diseñado desde cero para Jenkins Pipeline reduciendo el desorden y aumenta la claridad para trabajar en él.  
+
+Seguimos los siguientes pasos:  
+
++ Instalamos el plugin `Blue Ocean`:  
+
+
++ Creamos el clúster de test en GKE:  
+
++ Importamos la configuración del clúster en nuestra máquina Bitnami Jenkins:  
+`sudo gcloud container clusters get-credentials cluster-jenkins-test --zone us-east4-a --project jenkins-gke-276223`  
+![](capturas/gke_33.png)  
+> Estas órdenes la obtenemos al darle a conectar en cada clúster y nos indica la orden a conectar o copiar en nuestra máquina.
+
++ Modificamos la versión del Jenkinsfile añadiendo la línea de deploy en clúster test:  
+
++ Vemos el resultado en Jenkins y en la interfaz de Blue Ocean:  
+> Nota: también se tuvo los fallos de credenciales y permisos que se soluciona como se indicó más arriba.
+
++ Escalamos en nuestra máquina el servicio de Hello en el clúster de producción:  
+
++ Vemos también el deploy en GKE:  
 
 + Para lista de los nodos del cluster se usa `kubectl get nodes`.  
 
