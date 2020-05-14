@@ -563,3 +563,31 @@ El nuevo fichero [Jenkinsfile](gke_jenkins/Jenkinsfile) para la construcción de
 
 + Para eliminar un deployment `kubectl delete deployment hello-world`:  
  ![](capturas/bitnami_42.png)  
+
+##  MAVEN
+Maven es una herramienta open-source, que se creó en 2001 con el objetivo de simplificar los procesos de build (compilar y generar ejecutables a partir del código fuente).
+
+Para ello, en Maven se definen tres ciclos de build del software con una serie de etapas diferenciadas. Por ejemplo el ciclo por defecto tiene las etapas de:
+– Validación (validate): Validar que el proyecto es correcto.
+– Compilación (compile).
+– Test (test): Probar el código fuente usando un framework de pruebas unitarias.
+– Empaquetar (package): Empaquetar el código compilado y transformarlo en algún formato tipo .jar o .war.
+– Pruebas de integración (integration-test): Procesar y desplegar el código en algún entorno donde se puedan ejecutar las pruebas de integración.
+– Verificar que el código empaquetado es válido y cumple los criterios de calidad (verify).
+– Instalar el código empaquetado en el repositorio local de Maven, para usarlo como dependencia de otros proyectos (install).
+– Desplegar el código a un entorno (deploy).
+Para poder llevar a cabo alguna de estas fases en nuestro código, tan solo tendremos que ejecutar mvn y el nombre de la fase (la palabra que puse entre paréntesis). Además van en cadena, es decir, si empaquetamos el código (package), Maven ejecutará desde la fase de validación (validate) a empaquetación (package).
+
+### Instalar MAVEN
+cd /opt
+wget https://www-us.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+sudo tar xzf apache-maven-3.6.3-bin.tar.gz
+sudo ln -s apache-maven-3.6.3 maven
+sudo vi /etc/profile.d/maven.sh
+```
+export M2_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+```
+source /etc/profile.d/maven.sh
+mvn -version
+rm -f apache-maven-3.6.3-bin.tar.gz
