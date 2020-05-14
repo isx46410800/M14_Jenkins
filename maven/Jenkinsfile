@@ -1,8 +1,8 @@
 pipeline {
     agent any
+    JAVA_HOME = /opt/bitnami/java
     tools {
         maven 'Maven 3.3.9'
-        
     }
     stages {
         stage ('Initialize') {
@@ -16,7 +16,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh 'mvn install' 
+                sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
             post {
                 success {
