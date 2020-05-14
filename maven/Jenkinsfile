@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    JAVA_HOME = /opt/bitnami/java
+    environment {	
+    JAVA_HOME = '/opt/bitnami/java'
+    }
     tools {
         maven 'Maven 3.3.9'
     }
