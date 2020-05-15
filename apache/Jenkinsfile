@@ -54,12 +54,16 @@ pipeline {
 		  parallel {
 			  stage('Comprobamos apache1'){
 				  steps{
-					cat apache1:/var/www/html/index.html
+					sh '''
+						cat apache1:/var/www/html/index.html
+					'''
 				  }
 			  }
 			  stage('Comprobamos apache2'){
 				  steps{
-					cat apache2:/var/www/html/index.html
+					 sh '''
+						cat apache2:/var/www/html/index.html
+					 '''
 				  }
 			  }
 		  }
