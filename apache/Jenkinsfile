@@ -55,7 +55,7 @@ pipeline {
 			  stage('Comprobamos apache1'){
 				  steps{
 					sh '''
-						docker cp apache2:/var/www/html/index.html index_1.html
+						docker cp apache1:/var/www/html/index.html index_1.html
 						cat index_1.html
 					'''
 				  }
