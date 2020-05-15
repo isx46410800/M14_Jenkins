@@ -14,7 +14,7 @@ pipeline {
                         }
                         steps {
                             sh '''
-								docker build -t isx46410800/appflask:windows app_flask/.
+								docker build -t isx46410800/appflask:windows app_parallel/.
 							'''
                         }
               }
@@ -24,7 +24,7 @@ pipeline {
                         }
                         steps {
                             sh '''
-								docker build -t isx46410800/appflask:ios app_flask/.
+								docker build -t isx46410800/appflask:ios app_parallel/.
 							'''
                         }
               }
@@ -34,7 +34,7 @@ pipeline {
                         }
                         steps {
                             sh '''
-								docker build -t isx46410800/appflask:linux app_flask/.
+								docker build -t isx46410800/appflask:linux app_parallel/.
 							'''
                         }
               }
