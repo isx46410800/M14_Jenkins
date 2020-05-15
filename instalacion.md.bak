@@ -79,5 +79,5 @@ sudo systemctl start jenkins
 + Al instalar se crea el usuario y grupo `Jenkins`  
 + Jenkins trabaja en el directorio `/var/lib/jenkins`  
 + Los archivos de log están en `/var/log/jenkins/jenkins.log`  
-+ Los parámetros de configuración se encuentran en `/etc/sysconfig/jenkins`  
++ Los parametros de configuración se encuentran en `/etc/sysconfig/jenkins`  
 + Por defecto, el puerto donde trabaja Jenkins es el `8080`

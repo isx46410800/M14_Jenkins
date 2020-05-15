@@ -132,7 +132,7 @@ La creación de un Jenkinsfile y su subida al repositorio de control de versione
 
 <a name="id25"></a>
 ## __2.5. Plugins__  
-Un plugin es un fragmento o componente de código hecho para ampliar las funciones de una herramienta o de un programa.  
+Un plugin es un fragmento o componente de código hecho para amplicar las funciones de una herramienta o de un programa.  
 
 ![](capturas/plugins.jpg)  
 
@@ -164,10 +164,10 @@ En este primer ejercicio básico con Jenkins, lo que hacemos es coger el código
 
 + Guardamos nuestra prueba y miramos que funcione.
 
-+ A la izquierda nos sale un historial de los builds de nuestro proyecto, si sale la bolita azul es que todo ha ido bien. En cambio, si sale rojo, es que hay algún fallo.  
++ A la izquierda nos sale un historial de los builds de nuestro proyecto, si sale la bolita azul es que todo ha ido bien. En cambio, si sale rojo, es que hay algun fallo.  
 ![](capturas/helloworld_test1_1.png)  
 
-+ Podemos ver los logs clicándole a nuestro número de ítem tanto para ver los que funcionan como los que no.
++ Podemos ver los logs clicandole a nuestro número de item tanto para ver los que funcionan como los que no.
 En la opción `console output` vemos todo lo que va haciendo Jenkins y donde falla. Si no falla termina con un SUCCESS.
 
 + Aquí hacemos un ejemplo válido y otro erróneo poniendo mal el archivo a ejecutar.
@@ -194,7 +194,7 @@ Seguiremos los mismos pasos que el ejercicio 1 pero el `BUILD` lo construiremos 
 + Indicamos de nuevo la url del proyecto y la url del repositorio.  
 ![](capturas/appflask_test2_2.png)  
 
-+ Hacemos el build de construir el script en app flask en un entorno virtual, con los módulos que se instalan al crear el entorno virtual y finalmente ejecutar la app si pasa el test de prueba creado.  
++ Hacemos el build de construir el script en app flask en un entorno virual, con los módulos que se instalan al crear el entorno virtual y finalmente ejecutar la app si pasa el test de prueba creado.  
 ![](capturas/appflask_test2_3.png)  
 
 + Guardamos y ejecutamos el build.  
@@ -204,7 +204,7 @@ Seguiremos los mismos pasos que el ejercicio 1 pero el `BUILD` lo construiremos 
 `[fedora@ip-172-31-92-65 ~]$ sudo pip install virtualenv`  
 ![](capturas/appflask_test2_4.png)  
 
-+ <u>Segundo fallo:</u> no hemos puesto bien la orden de instalar los módulos necesarios del entorno virtual para hacer la app flask. Lo corregimos poniendo `pip install -r requisitos.txt`:  
++ <u>Segundo fallo:</u> no hemos puesto bien la orden de instalar los módulos necesarios del entorno virual para hacer la app flask. Lo corregimos poniendo `pip install -r requisitos.txt`:  
 ![](capturas/appflask_test2_7.png)  
 > Nota: para saber los requisitos, la prueba se hizo en local antes y con la orden siguiente, metidos los módulos en un fichero:  
 ```
@@ -228,7 +228,7 @@ En este caso se utiliza un ubuntu para la construcción del container Docker. De
 
 + En la sección de `BUILD` ponemos el proceso que hemos indicado en la explicación inicial de este ejercicio 3.  
 ![](capturas/appflaskDocker_test3_3.png)  
-> NOTA: añadimos que se borre el workspace antes de empezar todo. El workspace es el espacio de trabajo dónde se descarga las cosas para trabajar. Además también ponemos que vaya testeando el repositorio cada 5 minutos, para cuando hay cambios, haga otro build automáticamente.
+> NOTA: añadimos que se borre el workspace antes de empezar todo. El workspace es el espacio de trabajo dónde se descarga las cosas para trabajar. Además tambien ponemos que vaya testeando el repositorio cada 5 minutos, para cuando hay cambios, haga otro build automáticamente.
 ```
 Build Environment -> ￼Delete workspace before build starts
 Poll SCM -> Poll SCM H/5 * * * *
@@ -285,7 +285,7 @@ Login Succeeded
 
 + En la sección `Scan Multibranch Pipeline Triggers` indicamos `￼Periodically if not otherwise run` y la opción `Interval 5minutes`.  
 ![](capturas/pipeline_flaskDocker_3.png)  
-> Ésto hace que escanee nuestro repositorio cada 5minutos, y si ve cambios, vuelve a construir automáticamente el pipeline.
+> Ésto hace que escanea nuestro repositorio cada 5minutos, y si ve cambios, vuelve a construir automáticamente el pipeline.
 
 + Guardamos cambios.  
 
@@ -383,7 +383,7 @@ sudo apt-get install kubectl
 
     + Creamos un proyecto y le damos un nombre.  
     ![](capturas/gke_21.png)  
-    + Vamos a cuentas de servicio y creamos una nueva.  
+    + Vamos a cuentas de servicio y cremos una nueva.  
     ![](capturas/gke_3.png)  
     ![](capturas/gke_4.png)
     + Creamos una key en formato JSON de este servicio el cual nos servirá más tarde para Jenkins.  
@@ -448,7 +448,7 @@ sudo apt-get install kubectl
 + Ahora crearemos el clúster en GKE. Iremos a `Compute - Kubernetes Engine - Clústeres - Crear Clúster`
 ![](capturas/gke_22.png)  
 
-+ Para agregar a la instancia Bitnami Jenkins la configuración del clúster a la herramienta kubectl se ha de hacer:
++ Para agregar a la instancia Bitnami Jenkins la configuración del cluster a la herramienta kubectl se ha de hacer:
     + Instalamos la SDK de cloud:  
     ```
     # Update YUM with Cloud SDK repo information:
@@ -471,7 +471,7 @@ sudo apt-get install kubectl
     + Nos autenticamos con lo creado en GKE en la máquina Bitnami con la orden `gcloud auth login`.
 
 + Para conectar con la configuración del clúster a la máquina:  
-`sudo gcloud container clústers get-credentials clúster-jenkins-1 --zone us-east4-a --project jenkins-gke-276223`  
+`sudo gcloud container clusters get-credentials cluster-jenkins-1 --zone us-east4-a --project jenkins-gke-276223`  
 ![](capturas/gke_32.png)  
 > Estas órdenes la obtenemos al darle a conectar en cada clúster y nos indica la orden a conectar o copiar en nuestra máquina.
 
@@ -532,7 +532,7 @@ Seguimos los siguientes pasos:
 ![](capturas/gke_31.png)  
 
 + Importamos la `configuración del clúster` en nuestra máquina Bitnami Jenkins:  
-`sudo gcloud container clústers get-credentials cluster-jenkins-test --zone us-east4-a --project jenkins-gke-276223`  
+`sudo gcloud container clusters get-credentials cluster-jenkins-test --zone us-east4-a --project jenkins-gke-276223`  
 ![](capturas/bitnami_31.png)  
 ![](capturas/bitnami_32.png)
 
@@ -640,7 +640,7 @@ Vamos a explicar parte por parte nuestro fichero Jenkinsfile:
 [fichero Jenkinsfile](https://github.com/isx46410800/simple-java-maven-app/blob/master/Jenkinsfile)  
 
 + En la parte del __agent__ indicamos que se descarga una imagen desde docker con maven alpine en un contenedor. Tendremos trabajando Jenkins y un container Maven por separado pero cuando se ejecute el pipeline desde Jenkins, éste usa el agente de docker para su ejecución. la otra parte nos indica que se crea un volumen para descargar los artifacts de maven, ya que sino cada vez que se haga una ejecución se perdería los datos que necesita el agente para su container alpine.  
-+ La __stage Build__ nos indica que se realiza el paso de construir limpiamente la aplicación Java de nuestro código del repositorio GitHub. Recordamos con __sh__ sirve para ejecutar un shell script en un node Unix y acepta múltiples líneas.  
++ La __stage Build__ nos indica que se realiza el paso de contruir limpiamente la aplicación Java de nuestro código del repositorio GitHub. Recordamos con __sh__ sirve para ejecutar un shell script en un node Unix y acepta múltiples líneas.  
 + La __stage Test__ se ejecuta la prueba unitaria a nuestra app, generando un informe JUnit XML guardado en el path indicado dentro de nuestro workspace de jenkins (/var/lib/jenkins/workspace/simple-java-maven-app)
 + La __stage Deliver__ finalmente lo que hace es ejecutar el script _deliver.sh_, el cual permite ejecutar y generar la aplicación en un fichero java con el nombre de la versión.  
 
@@ -663,7 +663,7 @@ Pipeline:
 ## Ejercicio 8: nodos_simulacion  
 Jenkins permite conectar nodos esclavos (slave nodes) con diferentes Sistemas Operativos (Windows, GNU/Linux, Mac OS, Unix etc...) Los nodos esclavos son los encargados de ejecutar los Jobs en Jenkins para distribuir la carga entre los equipos y el servidor Jenkins es quién realiza la orquestación de las tareas.
 
-En esta simulación (no hace nada en sí el ejercicio) lo que hacemos es crear diferentes nodos esclavos con sistema operativo diferentes y recreamos una situación de trabajo en que una app se compila, construye, testea y lanza en diferentes plataformas de manera paralela. Si todo estuviera bien sin errores, podríamos decir que nuestro software ha pasado la prueba de integración continua, no fallaría en ninguna plataforma, ya testeada, y podríamos lanzarla a producción.  
+En esta simulación (no hace nada en sí el ejercicio) lo que hacemos es crear diferentes nodos esclaves con sistema operativo diferentes y recreamos una situación de trabajo en que una app se compila, construye, testea y lanza en diferentes plataformas de manera paralela. Si todo estuviera bién sin errores, podríamos decir que nuestro software ha pasado la prueba de integración continua, no fallaría en ninguna plataforma, ya testeada, y podríamos lanzarla a producción.  
 
 + Creamos diferentes nodos:  
   + Vamos a `Manage Jenkins - Manage nodes and clouds`:   
@@ -673,7 +673,7 @@ En esta simulación (no hace nada en sí el ejercicio) lo que hacemos es crear d
   ![](capturas/nodos3.png)   
   ![](capturas/nodos4.png)   
   ![](capturas/nodos5.png)   
-  > Nota: en real deberíamos tener una máquina virtual o real, docker,etc, con la que conectarnos y configurar las credenciales como nuevo nodo esclavo.  
+  > Nota: en real deberiamos tener una máquina virtual o real, docker,etc, con la que conectarnos y configurar las credenciales como nuevo nodo esclavo.  
 
   + Vemos los diferentes nodos:  
   ![](capturas/nodos2.png)   

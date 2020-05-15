@@ -25,7 +25,7 @@ En este caso hemos creado nuestra máquina en `AWS EDUCATE` pero se puede crear 
 + Para finalizar, daremos a `launch instance` y ya estará creada.
 
 ## Creación IP estática
-Éste es un paso de pago en Amazon. No obstante, crearemos esta IP estática para que nuestra máquina siempre tenga la misma IP. Con ésta nos permitirá que, aunque apaguemos nuestra máquina, al encenderla seguirá con la misma IP y no se cambiará por otra:
+Éste es un paso de pago en Amazon. No obstante, crearemos esta IP estática para que nuestra máquina siempre tenga la misma IP. Con ésto nos permitirá que, aunque apaguemos nuestra máquina, al encenderla seguirá con la misma IP y no se cambiará por otra:
 
 + En el menú principal iremos a:  
 `Network & Security - Elastic IPs`
