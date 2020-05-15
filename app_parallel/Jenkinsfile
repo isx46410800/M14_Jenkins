@@ -14,18 +14,18 @@ pipeline {
                         }
                         steps {
                             sh '''
-								docker build -t isx46410800/appflask:windows app_parallel/.
-							'''
+				docker build -t isx46410800/appflask:windows app_parallel/.
+			    '''
                         }
               }
-               stage('Build On IOS') {
+              stage('Build On IOS') {
                         agent {
                             label "IOS"
                         }
                         steps {
                             sh '''
-								docker build -t isx46410800/appflask:ios app_parallel/.
-							'''
+				docker build -t isx46410800/appflask:ios app_parallel/.
+			    '''
                         }
               }
               stage('Build On Linux') {
@@ -34,8 +34,8 @@ pipeline {
                         }
                         steps {
                             sh '''
-								docker build -t isx46410800/appflask:linux app_parallel/.
-							'''
+				docker build -t isx46410800/appflask:linux app_parallel/.
+			    '''
                         }
               }
           }
@@ -48,8 +48,8 @@ pipeline {
                         }
                         steps {
                             sh '''
-								docker run --rm --name appflask_win -h appflask_win -d isx46410800/appflask:windows
-							'''
+				docker run --rm --name appflask_win -h appflask_win -d isx46410800/appflask:windows
+			    '''
                         }
               }
                stage('Test On IOS') {
@@ -58,8 +58,8 @@ pipeline {
                         }
                         steps {
                             sh '''
-								docker run --rm --name appflask_ios -h appflask_ios -d isx46410800/appflask:ios
-							'''
+				docker run --rm --name appflask_ios -h appflask_ios -d isx46410800/appflask:ios
+			    '''
                         }
               }
               stage('Test On Linux') {
@@ -68,8 +68,8 @@ pipeline {
                         }
                         steps {
                             sh '''
-								docker run --rm --name appflask_linux -h appflask_linux -d isx46410800/appflask:linux
-							'''
+				docker run --rm --name appflask_linux -h appflask_linux -d isx46410800/appflask:linux
+		            '''
                         }
               }
           }
