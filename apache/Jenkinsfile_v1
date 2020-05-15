@@ -1,0 +1,88 @@
+//Creacion de un pipeline con diferentes jobs. Meter un index.html a dos server apache en docker
+pipeline {
+  agent any
+  stages {
+      stage('Comprobar repositorio git'){
+          steps{
+            git poll: true, url: 'https://github.com/isx46410800/M14_Jenkins.git'
+          }
+      }
+      stage('Construimos imagen apache docker'){
+          steps{
+            sh '''
+              docker build -t isx46410800/apache:jenkins apache/.
+            '''
+          }
+      }
+      stage('Desplegamos server apache1 en container'){
+          steps{
+            sh '''
+              docker run --rm --name apache1 -h apache1 -d isx46410800/apache:jenkins
+            '''
+          }
+      }
+      stage('Desplegamos server apache2 en container'){
+          steps{
+            sh '''
+              docker run --rm --name apache2 -h apache2 -d isx46410800/apache:jenkins
+            '''
+          }
+      }
+      stage('Integramos index.html en apache1'){
+          steps{
+            sh '''
+              docker cp ./apache/index1.html apache1:/var/www/html/index.html
+            '''
+          }
+      }
+      stage('Integramos index.html en apache2'){
+          steps{
+            sh '''
+              docker cp ./apache/index2.html apache2:/var/www/html/index.html
+            '''
+          }
+      }
+      stage('Commit de la imagen para DockerHub'){
+          steps{
+            sh '''
+              docker commit apache1 isx46410800/apache:jenkins
+            '''
+          }
+      }
+      stage('Push imagen a DockerHub'){
+          steps{
+            sh '''
+              docker push isx46410800/apache:jenkins
+            '''
+          }
+      }
+      stage('Paramos el container1'){
+          steps{
+            sh '''
+              docker stop apache1
+            '''
+          }
+      }
+      stage('Paramos el container2'){
+          steps{
+            sh '''
+              docker stop apache2
+            '''
+          }
+      }
+      stage('Eliminamos la imagen creada'){
+          steps{
+            sh '''
+              docker rmi -f isx46410800/apache:jenkins
+            '''
+          }
+      }
+      stage('Mensaje de finalización'){
+          steps{
+            sh '''
+              echo "Pipeline finalizado!!"
+            '''
+          }
+      }
+  }
+}

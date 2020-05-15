@@ -14,34 +14,56 @@ pipeline {
             '''
           }
       }
-      stage('Desplegamos server apache1 en container'){
-          steps{
-            sh '''
-              docker run --rm --name apache1 -h apache1 -d isx46410800/apache:jenkins
-            '''
-          }
-      }
-      stage('Desplegamos server apache2 en container'){
-          steps{
-            sh '''
-              docker run --rm --name apache2 -h apache2 -d isx46410800/apache:jenkins
-            '''
-          }
-      }
-      stage('Integramos index.html en apache1'){
-          steps{
-            sh '''
-              docker cp ./apache/index1.html apache1:/var/www/html/index.html
-            '''
-          }
-      }
-      stage('Integramos index.html en apache2'){
-          steps{
-            sh '''
-              docker cp ./apache/index2.html apache2:/var/www/html/index.html
-            '''
-          }
-      }
+      stage('Construimos server...'){
+		  parallel {
+			  stage('Desplegamos server apache1 en container'){
+				  steps{
+					sh '''
+					  docker run --rm --name apache1 -h apache1 -d isx46410800/apache:jenkins
+					'''
+				  }
+			  }
+			  stage('Desplegamos server apache2 en container'){
+				  steps{
+					sh '''
+					  docker run --rm --name apache2 -h apache2 -d isx46410800/apache:jenkins
+					'''
+				  }
+			  }
+		  }
+	  }
+	  stage('Desplegamos...'){
+		  parallel {
+			  stage('Integramos index.html en apache1'){
+				  steps{
+					sh '''
+					  docker cp ./apache/index1.html apache1:/var/www/html/index.html
+					'''
+				  }
+			  }
+			  stage('Integramos index.html en apache2'){
+				  steps{
+					sh '''
+					  docker cp ./apache/index2.html apache2:/var/www/html/index.html
+					'''
+				  }
+			  }
+		  }
+	  }
+	  stage('Comprobamos...'){
+		  parallel {
+			  stage('Comprobamos apache1'){
+				  steps{
+					cat apache1:/var/www/html/index.html
+				  }
+			  }
+			  stage('Comprobamos apache2'){
+				  steps{
+					cat apache2:/var/www/html/index.html
+				  }
+			  }
+		  }
+	  }
       stage('Commit de la imagen para DockerHub'){
           steps{
             sh '''
@@ -56,19 +78,23 @@ pipeline {
             '''
           }
       }
-      stage('Paramos el container1'){
-          steps{
-            sh '''
-              docker stop apache1
-            '''
-          }
-      }
-      stage('Paramos el container2'){
-          steps{
-            sh '''
-              docker stop apache2
-            '''
-          }
+      stage('Paramos...'){
+		  parallel {
+			  stage('Paramos el container1'){
+				  steps{
+					sh '''
+					  docker stop apache1
+					'''
+				  }
+			  }
+			  stage('Paramos el container2'){
+				  steps{
+					sh '''
+					  docker stop apache2
+					'''
+				  }
+			  }
+		  }
       }
       stage('Eliminamos la imagen creada'){
           steps{
