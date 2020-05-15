@@ -324,6 +324,14 @@ En este ejemplo construimos de nuevo un pipeline. En éste vamos a crear dos ser
 + Ahora ya todo `SUCCESS`.  
 ![](capturas/pipeline_apache_7.png)  
 
+### Ampliación
+Ahora vamos hacer una segunda versión del Jenkinsfile el cual haremos varias stages en paralelo, ya que hay pasos que es hacer lo mismo. Por otra parte también habrá un paso de comprobar que en realidad si que hay cada nuevo índice en cada container de apache antes de que paremos los contenedores.  
++ Vemos el nuevo fichero [Jenkinsfile](https://github.com/isx46410800/M14_Jenkins/blob/master/apache/Jenkinsfile)  
+> Nota: la primera versión está en el mismo sitio con el nombre Jenkinsfile_v1  
+
++ Generamos el pipeline y lo vemos más claro con la interfaz de Blue Ocean:  
+![](capturas/pipeline_apache_8.png)  
+
 <a name="id36"></a>
 ## __3.6. Ejercicio 6: jenkins-cloud-gke__
 En este ejercicio no vamos a utilizar nuestra instancia de Amazon, se puede hacer en ella sin problemas, pero vamos a utilizar otros servicios.  
