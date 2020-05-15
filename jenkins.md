@@ -17,7 +17,9 @@
     3.3. [Ejemplo 3: HelloWorld-appFlask-Docker_test3](#id33)  
     3.4. [Ejemplo 4: pipeline-jenkinsfile_test2](#id34)  
     3.5. [Ejemplo 5: pipeline-jenkinsfile-apache_test3](#id35)  
-    3.6. [Ejemplo 06](#id36)  
+    3.6. [Ejemplo 6: jenkins-cloud-gke](#id36)  
+    3.7. [Ejemplo 7: maven_test1](#id37)  
+    3.6. [Ejemplo 8: nodos](#id38)  
 
 <a name="id1"></a>
 # __1. ¿Qué es CI/CD?__  
@@ -323,7 +325,7 @@ En este ejemplo construimos de nuevo un pipeline. En éste vamos a crear dos ser
 ![](capturas/pipeline_apache_7.png)  
 
 <a name="id36"></a>
-## __3.6. Ejercicio 6__
+## __3.6. Ejercicio 6: jenkins-cloud-gke__
 En este ejercicio no vamos a utilizar nuestra instancia de Amazon, se puede hacer en ella sin problemas, pero vamos a utilizar otros servicios.  
 En este caso vamos a utilizar un server cloud de Jenkins a través de `Bitnami`.
 
@@ -564,30 +566,95 @@ El nuevo fichero [Jenkinsfile](gke_jenkins/Jenkinsfile) para la construcción de
 + Para eliminar un deployment `kubectl delete deployment hello-world`:  
  ![](capturas/bitnami_42.png)  
 
-##  MAVEN
-Maven es una herramienta open-source, que se creó en 2001 con el objetivo de simplificar los procesos de build (compilar y generar ejecutables a partir del código fuente).
+<a name="id37"></a>
+##  Ejercicio 7:  maven_test1
+Maven es una herramienta open-source, que se creó en 2001 con el objetivo de simplificar los procesos de build (compilar y generar ejecutables a partir del código fuente).  
 
-Para ello, en Maven se definen tres ciclos de build del software con una serie de etapas diferenciadas. Por ejemplo el ciclo por defecto tiene las etapas de:
-– Validación (validate): Validar que el proyecto es correcto.
-– Compilación (compile).
-– Test (test): Probar el código fuente usando un framework de pruebas unitarias.
-– Empaquetar (package): Empaquetar el código compilado y transformarlo en algún formato tipo .jar o .war.
-– Pruebas de integración (integration-test): Procesar y desplegar el código en algún entorno donde se puedan ejecutar las pruebas de integración.
-– Verificar que el código empaquetado es válido y cumple los criterios de calidad (verify).
-– Instalar el código empaquetado en el repositorio local de Maven, para usarlo como dependencia de otros proyectos (install).
-– Desplegar el código a un entorno (deploy).
-Para poder llevar a cabo alguna de estas fases en nuestro código, tan solo tendremos que ejecutar mvn y el nombre de la fase (la palabra que puse entre paréntesis). Además van en cadena, es decir, si empaquetamos el código (package), Maven ejecutará desde la fase de validación (validate) a empaquetación (package).
+Maven utiliza los arquetipos(artifacts) de Maven, es un patrón o modelo sobre el que se pueden desarrollar todas aquellas tareas que son de un mismo tipo, los cuales son plantillas que se pueden utilizar para crear proyectos, módulos, etc. que se basan en parámetros establecidos en la definición del arquetipo
 
-### Instalar MAVEN
-cd /opt
-wget https://www-us.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
-sudo tar xzf apache-maven-3.6.3-bin.tar.gz
-sudo ln -s apache-maven-3.6.3 maven
-sudo vi /etc/profile.d/maven.sh
-```
-export M2_HOME=/opt/maven
-export PATH=${M2_HOME}/bin:${PATH}
-```
-source /etc/profile.d/maven.sh
-mvn -version
-rm -f apache-maven-3.6.3-bin.tar.gz
+Las partes del ciclo de vida principal del proyecto Maven son:  
++ __compile:__ Genera los ficheros .class compilando los fuentes .java
++ __test:__ Ejecuta los test automáticos de JUnit existentes, abortando el proceso si alguno de ellos falla.
++ __package:__ Genera el fichero .jar con los .class compilados
++ __install:__ Copia el fichero .jar a un directorio de nuestro ordenador donde maven deja todos los .jar. De esta forma esos .jar pueden utilizarse en otros proyectos maven en el mismo ordenador.
++ __deploy:__ Copia el fichero .jar a un servidor remoto, poniéndolo disponible para cualquier proyecto maven con acceso a ese servidor remoto.
+
+Cuando se ejecuta cualquiera de los comandos, Maven irá verificando todas las fases del ciclo de vida desde la primera hasta la del comando, ejecutando solo aquellas que no se hayan ejecutado previamente.
+
+También existen algunas metas que están fuera del ciclo de vida que pueden ser llamadas, pero Maven asume que estas metas no son parte del ciclo de vida por defecto (no tienen que ser siempre realizadas). Estas metas son:  
++ __clean:__ Elimina todos los .class y .jar generados. Después de este comando se puede comenzar un compilado desde cero.
++ __assembly:__ Genera un fichero .zip con todo lo necesario para instalar nuestro programa java. Se debe configurar previamente en un fichero xml qué se debe incluir en ese zip.
++ __site:__ Genera un sitio web con la información de nuestro proyecto. Dicha información debe escribirse en el fichero pom.xml y ficheros .apt separados.
++ __site-deploy:__ Sube el sitio web al servidor que hayamos configurado.
+
+Para crear un proyecto se inicia con: `mvn archetype:create -DgroupId=com.xxx.xxxapp -DartifactId=x`.  
+Cuando se ejecuta este comando, automáticamente se crea una estructura de directorios y ficheros comunes para cualquier proyecto, de los cuales destacamos el `pom.xml`, `src/main` y `src/test`.  
+
+El fichero pom.xml es donde se describe nuestro proyecto.
+
+### Instalar Maven
+Para instalar Maven en nuestra máquina lo podemos hacer de dos maneras: descargando maven desde la página oficial o utilizando la herramienta global de Jenkins.  
++ Desde la página oficial:  
+  + En nuestra instancia descargamos Maven:  
+  ```
+  cd /opt
+  wget https://www-us.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+  sudo tar xzf apache-maven-3.6.3-bin.tar.gz
+  sudo ln -s apache-maven-3.6.3 maven
+  ```
+  + Añadimos esto en el siguiente fichero:  
+  `sudo vi /etc/profile.d/maven.sh`  
+  ```
+  export M2_HOME=/opt/maven
+  export PATH=${M2_HOME}/bin:${PATH}
+  ```
+  + Ejecutamos y comprobamos los cambios:  
+  ```
+  source /etc/profile.d/maven.sh
+  mvn -version
+  ```
+
++ Desde la herramienta oficial de Jenkins:  
+  + Ir a `Manage Jenkins - Global Tool Configuration`  
+  ![](capturas/maven1.png)  
+  + Bajamos donde indica `Maven` e indicamos la versión y un nombre. Este nombre que le ponemos será con el que llamemos a la herramienta Maven desde un fichero Jenkinsfile.  
+  ![](capturas/maven2.png)  
+  + Guardamos cambios
+
+### Ejercicio  
+En este ejercicio lo que haremos será una pipeline de un ejemplo de aplicación java Hello World con Maven en Jenkins.  
+
+El ejercicio descarga una imagen de Maven docker y la ejecuta en un contenedor docker. Después construye la aplicación java en la que en esta etapa build, descarga los artifacts necesarios para construirla y se guardan en el repositorio local Maven de Jenkins. Después se le hace pasar un test a nuestra aplicación, mostrando si la pasa o no, los fallos del test y generando un informe JUnit XML en el workspace. Finalmente, se pasa un script para generar nuestra aplicación java junto al nombre de la versión.  
+
+Para este ejercicio, tenemos alojado nuestro código en el siguiente repositorio: [github maven](https://github.com/isx46410800/simple-java-maven-app)  
+
+Vamos a explicar parte por parte nuestro fichero Jenkinsfile:  
+[fichero Jenkinsfile](https://github.com/isx46410800/simple-java-maven-app/blob/master/Jenkinsfile)  
+
++ En la parte del __agent__ indicamos que se descarga una imagen desde docker con maven alpine en un contenedor. Tendremos trabajando Jenkins y un container Maven por separado pero cuando se ejecute el pipeline desde Jenkins, éste usa el agente de docker para su ejecución. la otra parte nos indica que se crea un volumen para descargar los artifacts de maven, ya que sino cada vez que se haga una ejecución se perdería los datos que necesita el agente para su container alpine.  
++ La __stage Build__ nos indica que se realiza el paso de contruir limpiamente la aplicación Java de nuestro código del repositorio GitHub. Recordamos con __sh__ sirve para ejecutar un shell script en un node Unix y acepta múltiples líneas.  
++ La __stage Test__ se ejecuta la prueba unitaria a nuestra app, generando un informe JUnit XML guardado en el path indicado dentro de nuestro workspace de jenkins (/var/lib/jenkins/workspace/simple-java-maven-app)
++ La __stage Deliver__ finalmente lo que hace es ejecutar el script _deliver.sh_, el cual permite ejecutar y generar la aplicación en un fichero java con el nombre de la versión.  
+
+Pipeline:  
++ Configuración:  
+![](capturas/maven4.png)  
+![](capturas/maven5.png)  
+
++ Ejecución:  
+![](capturas/maven6.png)  
+![](capturas/maven7.png)  
+![](capturas/maven8.png)  
+
++ Resultados:  
+![](capturas/maven3.png)  
+![](capturas/maven9.png)  
+> Uno de los fallos fue tener mal escrito el Jenkinsfile no cerrando bien las llaves.  
+
+<a name="id38"></a>
+## SIMULACION NODOS
+Jenkins permite conectar nodos esclavos (slave nodes) con diferentes Sistemas Operativos (Windows, GNU/Linux, Mac OS, Unix etc...) Los nodos esclavos son los encargados de ejecutar los Jobs en Jenkins para distribuir la carga entre los equipos y el servidor Jenkins es quién realiza la orquestación de las tareas.
+
+creamos diferentes nodos
+
+https://websetnet.net/es/create-master-slave-environment-jenkins/
