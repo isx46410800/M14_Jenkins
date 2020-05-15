@@ -1,0 +1,129 @@
+pipeline {
+  agent any
+  stages {
+      stage('Comprobar repositorio git'){
+          steps{
+            git poll: true, url: 'https://github.com/isx46410800/M14_Jenkins.git'
+          }
+      }
+      stage('Compilamos código de la app'){
+          steps{
+            echo "Hello World"
+          }
+      }
+      stage('Construimos imagen docker'){
+          parallel {
+              stage('Build On Windows') {
+                        agent {
+                            label "windows"
+                        }
+                        steps {
+                           echo "construyendo app en windows..."
+                           echo "Hello World"
+                        }
+              }
+               stage('Build On IOS') {
+                        agent {
+                            label "IOS"
+                        }
+                        steps {
+                           echo "construyendo app en IOS..."
+                           echo "Hello World"
+                        }
+              }
+              stage('Build On Linux') {
+                        agent {
+                            label "linux"
+                        }
+						steps {
+                           echo "construyendo app en linux..."
+                           echo "Hello World"
+                        }
+              }
+          }
+      }
+      stage('Deploy test app en docker'){
+          parallel {
+              stage('Test On Windows') {
+                        agent {
+                            label "windows"
+                        }
+                        steps {
+                            echo "desplegando app en windows..."
+                            echo "Hello World"
+                        }
+              }
+               stage('Test On IOS') {
+                        agent {
+                            label "IOS"
+                        }
+                        steps {
+                            echo "desplegando app en ios..."
+                            echo "Hello World"
+                        }
+              }
+              stage('Test On Linux') {
+                        agent {
+                            label "linux"
+                        }
+                        steps {
+                            echo "desplegando app en linux..."
+                            echo "Hello World"
+                        }
+              }
+          }
+      }
+	  stage('Deploy producción app en docker'){
+          parallel {
+              stage('Deploy On Windows') {
+                        agent {
+                            label "windows"
+                        }
+                        steps {
+                            echo "desplegando app en windows..."
+                            echo "Hello World"
+                        }
+              }
+               stage('Deploy On IOS') {
+                        agent {
+                            label "IOS"
+                        }
+                        steps {
+                            echo "desplegando app en ios..."
+                            echo "Hello World"
+                        }
+              }
+              stage('Deploy On Linux') {
+                        agent {
+                            label "linux"
+                        }
+                        steps {
+                            echo "desplegando app en linux..."
+                            echo "Hello World"
+                        }
+              }
+          }
+      }
+      stage('Stage'){
+          steps{
+            sh '''
+              echo "App Hello world en fase stage"
+            '''
+          }
+      }
+      stage('Production'){
+          steps{
+            sh '''
+              echo "App Hello World en fase de producción!!"
+            '''
+          }
+      }
+      stage('Mensaje de finalización'){
+          steps{
+            sh '''
+              echo "Integración App Hello World finalizada!!"
+            '''
+          }
+      }
+  }
+}

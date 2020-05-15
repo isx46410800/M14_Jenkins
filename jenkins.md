@@ -19,7 +19,7 @@
     3.5. [Ejemplo 5: pipeline-jenkinsfile-apache_test3](#id35)  
     3.6. [Ejemplo 6: jenkins-cloud-gke](#id36)  
     3.7. [Ejemplo 7: maven_test1](#id37)  
-    3.6. [Ejemplo 8: nodos](#id38)  
+    3.6. [Ejemplo 8: nodos_simulacion](#id38)  
 
 <a name="id1"></a>
 # __1. ¿Qué es CI/CD?__  
@@ -660,9 +660,23 @@ Pipeline:
 > Uno de los fallos fue tener mal escrito el Jenkinsfile no cerrando bien las llaves.  
 
 <a name="id38"></a>
-## SIMULACION NODOS
+## Ejercicio 8: nodos_simulacion  
 Jenkins permite conectar nodos esclavos (slave nodes) con diferentes Sistemas Operativos (Windows, GNU/Linux, Mac OS, Unix etc...) Los nodos esclavos son los encargados de ejecutar los Jobs en Jenkins para distribuir la carga entre los equipos y el servidor Jenkins es quién realiza la orquestación de las tareas.
 
-creamos diferentes nodos
+En esta simulación (no hace nada en sí el ejercicio) lo que hacemos es crear diferentes nodos esclaves con sistema operativo diferentes y recreamos una situación de trabajo en que una app se compila, construye, testea y lanza en diferentes plataformas de manera paralela. Si todo estuviera bién sin errores, podríamos decir que nuestro software ha pasado la prueba de integración continua, no fallaría en ninguna plataforma, ya testeada, y podríamos lanzarla a producción.  
 
-https://websetnet.net/es/create-master-slave-environment-jenkins/
++ Creamos diferentes nodos:  
+  + Vamos a `Manage Jenkins - Manage nodes and clouds`:   
+  ![](capturas/nodos1.png)  
+
+  + Clicamos en `New Node` y lo configuramos:
+  ![](capturas/nodos3.png)   
+  ![](capturas/nodos4.png)   
+  ![](capturas/nodos5.png)   
+  > Nota: en real deberiamos tener una máquina virtual o real, docker,etc, con la que conectarnos y configurar las credenciales como nuevo nodo esclavo.  
+
+  + Vemos los diferentes nodos:  
+  ![](capturas/nodos2.png)   
+
+  + Probamos la simulación:  
+  ![](capturas/nodos6.png)    
