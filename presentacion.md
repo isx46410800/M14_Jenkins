@@ -129,3 +129,6 @@
 ### ESQUEMA EJERCICIOS
 
 <img src="capturas/esquema.png" height="500">
+
+### FIN
+¡Gracias por vuestra asistencia!  
