@@ -19,7 +19,7 @@
     3.5. [Ejemplo 5: pipeline-jenkinsfile-apache_test3](#id35)  
     3.6. [Ejemplo 6: jenkins-cloud-gke](#id36)  
     3.7. [Ejemplo 7: maven_test1](#id37)  
-    3.6. [Ejemplo 8: nodos_simulacion](#id38)  
+    3.8. [Ejemplo 8: nodos_simulacion](#id38)  
 
 <a name="id1"></a>
 # __1. ¿Qué es CI/CD?__  
@@ -178,7 +178,7 @@ En la opción `console output` vemos todo lo que va haciendo Jenkins y donde fal
   > Éste es el caso en que ha fallado e indica el estado de FAILURE por no encontrar el archivo indicado en la url del repositorio.
 
 <a name="id32"></a>
-## __3.2. Ejercicio 2: HelloWorld-appFlask_test2__
+## __3.2. Ejercicio 2: HelloWorld-appFlask_test2__  
 En este segundo ejercicio será una copia del anterior. No obstante, en este caso, el script de _Hello World_ será transformado en una `aplicación web Flask`.
 
 Flask es un micro Framework escrito en Python y concebido para facilitar el desarrollo de Aplicaciones Web bajo el patrón MVC.  
@@ -333,7 +333,7 @@ Ahora vamos hacer una segunda versión del Jenkinsfile el cual haremos varias st
 ![](capturas/pipeline_apache_8.png)  
 
 <a name="id36"></a>
-## __3.6. Ejercicio 6: jenkins-cloud-gke__
+## __3.6. Ejercicio 6: jenkins-cloud-gke__  
 En este ejercicio no vamos a utilizar nuestra instancia de Amazon, se puede hacer en ella sin problemas, pero vamos a utilizar otros servicios.  
 En este caso vamos a utilizar un server cloud de Jenkins a través de `Bitnami`.
 
@@ -574,8 +574,9 @@ El nuevo fichero [Jenkinsfile](gke_jenkins/Jenkinsfile) para la construcción de
 + Para eliminar un deployment `kubectl delete deployment hello-world`:  
  ![](capturas/bitnami_42.png)  
 
+
 <a name="id37"></a>
-##  Ejercicio 7:  maven_test1
+##  __3.7. Ejercicio 7:  maven_test1__  
 Maven es una herramienta open-source, que se creó en 2001 con el objetivo de simplificar los procesos de build (compilar y generar ejecutables a partir del código fuente).  
 
 Maven utiliza los arquetipos(artifacts) de Maven, es un patrón o modelo sobre el que se pueden desarrollar todas aquellas tareas que son de un mismo tipo, los cuales son plantillas que se pueden utilizar para crear proyectos, módulos, etc. que se basan en parámetros establecidos en la definición del arquetipo
@@ -660,7 +661,7 @@ Pipeline:
 > Uno de los fallos fue tener mal escrito el Jenkinsfile no cerrando bien las llaves.  
 
 <a name="id38"></a>
-## Ejercicio 8: nodos_simulacion  
+## __3.8. Ejercicio 8: nodos_simulacion__  
 Jenkins permite conectar nodos esclavos (slave nodes) con diferentes Sistemas Operativos (Windows, GNU/Linux, Mac OS, Unix etc...) Los nodos esclavos son los encargados de ejecutar los Jobs en Jenkins para distribuir la carga entre los equipos y el servidor Jenkins es quién realiza la orquestación de las tareas.
 
 En esta simulación (no hace nada en sí el ejercicio) lo que hacemos es crear diferentes nodos esclavos con sistema operativo diferentes y recreamos una situación de trabajo en que una app se compila, construye, testea y lanza en diferentes plataformas de manera paralela. Si todo estuviera bien sin errores, podríamos decir que nuestro software ha pasado la prueba de integración continua, no fallaría en ninguna plataforma, ya testeada, y podríamos lanzarla a producción.  
