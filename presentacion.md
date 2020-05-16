@@ -1,4 +1,8 @@
-# CI/CD
+% Proyecto final ASIX  
+% CI/CD JENKINS  
+% Miguel Amorós  
+
+### CI/CD
 
 + Las siglas __CI/CD__ se refiere al término de _Continuous Integration / Continuous Deployment_.
 
@@ -7,11 +11,11 @@
     + Distribución continua
     + Implementación continua
 
-# ETAPAS CI/CD
+### ETAPAS CI/CD
 
 ![](capturas/ci-cd.png)
 
-# EJEMPLOS
+### EJEMPLOS
 + Jenkins
 + Gitlab  
 + TeamCity  
@@ -20,18 +24,23 @@
 + Puppet Enterprise  
 + ...
 
-# METODOLOGÍA ÁGILE
+### METODOLOGÍA ÁGILE
 
 ![](capturas/agile.jpg)
 
-+ Ventajas:
-    + Adaptabilidad
-    + Entrega rápida de software funcional
-    + Poca o nula planificación
-    + Flexibilidad para los desarrolladores
-    + Promueve el trabajo en equipo y la capacitación
+### Ventajas
 
-# JENKINS
++ Adaptabilidad
++ Entrega rápida de software funcional
++ Poca o nula planificación
++ Flexibilidad para los desarrolladores
++ Promueve el trabajo en equipo y la capacitación
+
+### JENKINS
+
+![](capturas/logo_jenkins.png)
+
+### SOBRE JENKINS...
 
 + Desarrollado originalmente con el nombre Hudson (2004) en Sun Microsystems
 + Lanzamiento en 2011
@@ -40,9 +49,8 @@
 + Escrito en Java
 + +14.000 plugins para soportar la automatización de todo tipo de tareas
 
-![](capturas/logo_jenkins.png)
 
-# CARACTERÍSTICAS
+### CARACTERÍSTICAS
 
 + Testar el software.
 + Revisar las métricas de calidad del software
@@ -51,22 +59,21 @@
 + Notificar debidamente a los desarrolladores o al equipo de errores
 + Generar o visualizar la documentación de un proyecto
 
-# PIPELINES
+### PIPELINES
 
 + Conjunto de prácticas para incorporar la automatización continua y el control permanente en todo el ciclo de vida.
-
 + Desde las etapas de integración y prueba, hasta las de distribución e implementación en el entorno elegido.  
 
-![](capturas/pipelines.png)  
+  <img src="capturas/pipelines.png" height="200">
 
-# CARACTERÍSTICAS PIPELINES
+### CARACTERÍSTICAS PIPELINES
 
 + Integración y verificación
 + Automatización
 + Cultura DevOps
 + Contenedores
 
-# JOBS
+### JOBS
 
 + La base de Jenkins son las tareas Jobs
 + Se indica todo el proceso hasta llegar a un build final estable.  
@@ -74,24 +81,27 @@
 + Se pasan las pruebas y métricas de calidad para detectar los errores
 + Sabemos el estado del software en todo momento
 
-# JENKINSFILE
+### JENKINSFILE
 
 + El pipeline del proyecto se declara en un fichero, se almacena y se versiona junto con el código en un fichero comúnmente llamado _Jenkinsfile_
 
-![](capturas/jenkinsfile.png)  
+###
 
-# PLUGINS
+![](capturas/jenkinsfile.png)
+
+### PLUGINS
 
 + Fragmento o componente de código hecho para ampliar las funciones de una herramienta o de un programa.  
 
-![](capturas/plugins.jpg)  
+  <img src="capturas/plugins.jpg" height="120">  
+
 
 + Docker plugin
 + GitHub plugin
 + Blue Ocean plugin
 + Google Kubernetes Engine plugin
 
-# INSFRAESTRUCTURA
+### INSFRAESTRUCTURA
 
 + Instancia [AWS AMAZON EDUCATE](https://github.com/isx46410800/M14_Jenkins/blob/master/aws_amazon.md)
 + AMI Fedora 29
@@ -100,7 +110,7 @@
 + Repositorio GitHub
 + Google Kubernetes Engine (GKE)
 
-# INSTALACIÓN JENKINS
+### INSTALACIÓN JENKINS
 
 + Es un servidor de automatización multiplataforma
 + [Descargar Jenkins](https://jenkins.io/download/)
@@ -108,7 +118,7 @@
 + Previamente es necesario instalar _Java_
 + Navegador compatible
 
-# CONFIGURACIÓN JENKINS
+### CONFIGURACIÓN JENKINS
 
 + Entrar al navegador (http://18.209.188.35:9090/)
 + Configurar el admin inicial
@@ -116,4 +126,6 @@
 + Crear usuario administrador
 + [Configuración paso a paso](https://github.com/isx46410800/M14_Jenkins/blob/master/configuracion.md)
 
-# EJERCICIO PRÁCTICO
+### ESQUEMA EJERCICIOS
+
+<img src="capturas/esquema.png" height="500">

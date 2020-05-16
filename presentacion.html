@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="CI/CD JENKINS">
+  <title>Proyecto final ASIX</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Proyecto final ASIX</h1>
+  <p class="author">CI/CD JENKINS</p>
+  <p class="date">Miguel Amorós</p>
+</section>
+
+<section id="cicd" class="slide level3">
+<h3>CI/CD</h3>
+<ul>
+<li><p>Las siglas <strong>CI/CD</strong> se refiere al término de <em>Continuous Integration / Continuous Deployment</em>.</p></li>
+<li>La CI/CD es un método para distribuir aplicaciones a los clientes mediante el uso de la automatización en las etapas del desarrollo de aplicaciones:
+<ul>
+<li>Integración continua</li>
+<li>Distribución continua</li>
+<li>Implementación continua</li>
+</ul></li>
+</ul>
+</section>
+<section id="etapas-cicd" class="slide level3">
+<h3>ETAPAS CI/CD</h3>
+<figure>
+<img src="capturas/ci-cd.png" />
+</figure>
+</section>
+<section id="ejemplos" class="slide level3">
+<h3>EJEMPLOS</h3>
+<ul>
+<li>Jenkins</li>
+<li>Gitlab<br />
+</li>
+<li>TeamCity<br />
+</li>
+<li>Travis CI</li>
+<li>Buddy<br />
+</li>
+<li>Puppet Enterprise<br />
+</li>
+<li>...</li>
+</ul>
+</section>
+<section id="metodología-ágile" class="slide level3">
+<h3>METODOLOGÍA ÁGILE</h3>
+<figure>
+<img src="capturas/agile.jpg" />
+</figure>
+</section>
+<section id="ventajas" class="slide level3">
+<h3>Ventajas</h3>
+<ul>
+<li>Adaptabilidad</li>
+<li>Entrega rápida de software funcional</li>
+<li>Poca o nula planificación</li>
+<li>Flexibilidad para los desarrolladores</li>
+<li>Promueve el trabajo en equipo y la capacitación</li>
+</ul>
+</section>
+<section id="jenkins" class="slide level3">
+<h3>JENKINS</h3>
+<figure>
+<img src="capturas/logo_jenkins.png" />
+</figure>
+</section>
+<section id="sobre-jenkins..." class="slide level3">
+<h3>SOBRE JENKINS...</h3>
+<ul>
+<li>Desarrollado originalmente con el nombre Hudson (2004) en Sun Microsystems</li>
+<li>Lanzamiento en 2011</li>
+<li>Servidor open source de integración continua (CI)</li>
+<li>Software de automatización más usado de todos</li>
+<li>Escrito en Java</li>
+<li>+14.000 plugins para soportar la automatización de todo tipo de tareas</li>
+</ul>
+</section>
+<section id="características" class="slide level3">
+<h3>CARACTERÍSTICAS</h3>
+<ul>
+<li>Testar el software.</li>
+<li>Revisar las métricas de calidad del software</li>
+<li>Enviar las modificaciones del software</li>
+<li>Automatizar la compilación del software o su despliegue</li>
+<li>Notificar debidamente a los desarrolladores o al equipo de errores</li>
+<li>Generar o visualizar la documentación de un proyecto</li>
+</ul>
+</section>
+<section id="pipelines" class="slide level3">
+<h3>PIPELINES</h3>
+<ul>
+<li>Conjunto de prácticas para incorporar la automatización continua y el control permanente en todo el ciclo de vida.</li>
+<li>Desde las etapas de integración y prueba, hasta las de distribución e implementación en el entorno elegido.</li>
+</ul>
+<p><img src="capturas/pipelines.png" height="200"></p>
+</section>
+<section id="características-pipelines" class="slide level3">
+<h3>CARACTERÍSTICAS PIPELINES</h3>
+<ul>
+<li>Integración y verificación</li>
+<li>Automatización</li>
+<li>Cultura DevOps</li>
+<li>Contenedores</li>
+</ul>
+</section>
+<section id="jobs" class="slide level3">
+<h3>JOBS</h3>
+<ul>
+<li>La base de Jenkins son las tareas Jobs</li>
+<li>Se indica todo el proceso hasta llegar a un build final estable.<br />
+</li>
+<li>Cada integración se verifica compilando el código fuente</li>
+<li>Se pasan las pruebas y métricas de calidad para detectar los errores</li>
+<li>Sabemos el estado del software en todo momento</li>
+</ul>
+</section>
+<section id="jenkinsfile" class="slide level3">
+<h3>JENKINSFILE</h3>
+<ul>
+<li>El pipeline del proyecto se declara en un fichero, se almacena y se versiona junto con el código en un fichero comúnmente llamado <em>Jenkinsfile</em></li>
+</ul>
+</section>
+<section id="section" class="slide level3">
+<h3></h3>
+<figure>
+<img src="capturas/jenkinsfile.png" />
+</figure>
+</section>
+<section id="plugins" class="slide level3">
+<h3>PLUGINS</h3>
+<ul>
+<li>Fragmento o componente de código hecho para ampliar las funciones de una herramienta o de un programa.</li>
+</ul>
+<p><img src="capturas/plugins.jpg" height="120"></p>
+<ul>
+<li>Docker plugin</li>
+<li>GitHub plugin</li>
+<li>Blue Ocean plugin</li>
+<li>Google Kubernetes Engine plugin</li>
+</ul>
+</section>
+<section id="insfraestructura" class="slide level3">
+<h3>INSFRAESTRUCTURA</h3>
+<ul>
+<li>Instancia <a href="https://github.com/isx46410800/M14_Jenkins/blob/master/aws_amazon.md">AWS AMAZON EDUCATE</a></li>
+<li>AMI Fedora 29</li>
+<li>IP pública elástica (http://18.209.188.35:9090/)</li>
+<li>Bitnami Cloud con Jenkins-Debian (http://34.65.131.122:8080/)</li>
+<li>Repositorio GitHub</li>
+<li>Google Kubernetes Engine (GKE)</li>
+</ul>
+</section>
+<section id="instalación-jenkins" class="slide level3">
+<h3>INSTALACIÓN JENKINS</h3>
+<ul>
+<li>Es un servidor de automatización multiplataforma</li>
+<li><a href="https://jenkins.io/download/">Descargar Jenkins</a></li>
+<li><a href="https://github.com/isx46410800/M14_Jenkins/blob/master/instalacion.md">Instalación paso a paso</a></li>
+<li>Previamente es necesario instalar <em>Java</em></li>
+<li>Navegador compatible</li>
+</ul>
+</section>
+<section id="configuración-jenkins" class="slide level3">
+<h3>CONFIGURACIÓN JENKINS</h3>
+<ul>
+<li>Entrar al navegador (http://18.209.188.35:9090/)</li>
+<li>Configurar el admin inicial</li>
+<li>Instalar plugins</li>
+<li>Crear usuario administrador</li>
+<li><a href="https://github.com/isx46410800/M14_Jenkins/blob/master/configuracion.md">Configuración paso a paso</a></li>
+</ul>
+</section>
+<section id="esquema-ejercicios" class="slide level3">
+<h3>ESQUEMA EJERCICIOS</h3>
+<p><img src="capturas/esquema.png" height="500"></p>
+</section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Transition style
+        transition: 'zoom', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
