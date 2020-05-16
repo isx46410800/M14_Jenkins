@@ -11,3 +11,6 @@ Ficheros a tener en cuenta:
 + [instalacion.md](./instalacion.md): en este fichero encontraremos la documentación para instalar Jenkins en nuestro sistema operativo.  
 + [configuracion.md](./configuracion.md): en este fichero encontraremos cómo configurar Jenkins una vez instalado.  
 + [jenkins.md](./jenkins.md): en este fichero encontraremos la teoría de CI/CD con Jenkins y su implementación con ejercicios prácticos explicados paso a paso.  
++ [presentacion.md](./presentacion.md): en este fichero encontraremos la presentación del proyecto.  
++ [presentacion.html](./presentacion.html): en este fichero encontraremos la presentación del proyecto en formato html.
+> Nota: para crearla y usar el tema de reveal.js seguir estas [indicaciones](./crear_presentacion.md)  
