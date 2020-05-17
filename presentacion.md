@@ -1,7 +1,3 @@
-% Proyecto final ASIX  
-% CI/CD JENKINS  
-% Miguel Amorós  
-
 ### CI/CD
 
 + Las siglas __CI/CD__ se refiere al término de _Continuous Integration / Continuous Deployment_.
