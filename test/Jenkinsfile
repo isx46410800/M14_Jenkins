@@ -1,0 +1,28 @@
+pipeline {
+	    agent none 
+	    stages {
+	        stage('Build') {
+	            steps {
+	                echo 'Compilando codigo de mi aplicacion'
+	            }
+	        }
+	        stage('Test') {
+	            steps {
+	                echo 'Prueba 1 en windows'
+                    echo 'Prueba 2 en linux'
+
+	            }
+	        }
+            stage('Deploy test') {
+	            steps {
+	                echo 'Test deploy'
+	            }
+	        }
+             stage('Deploy production') {
+	            steps {
+	                input message: "deploy en producion?"
+	                echo 'deploy'
+	            }
+	        }
+	 }
+}
