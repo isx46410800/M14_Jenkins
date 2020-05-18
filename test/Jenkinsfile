@@ -7,17 +7,23 @@ pipeline {
 	            }
 	        }
 	        stage('Test') {
-	            steps {
-	                echo 'Prueba 1 en windows'
-                    echo 'Prueba 2 en linux'
-
-	            }
+		 parallel {
+		    stage('test en windows'){
+	              steps {
+	                sh'''
+			bash ./scripts/helloworld.sh
+			'''
+	              }
+		    }
+		    stage('test en linux'){
+                      steps {
+                        sh'''
+                        bash ./scripts/helloworld.sh
+                        '''
+                      }
+                    }
 	        }
-            stage('Deploy test') {
-	            steps {
-	                echo 'Test deploy'
-	            }
-	        }
+	     }
              stage('Deploy production') {
 	            steps {
 	                input message: "deploy en producion?"
