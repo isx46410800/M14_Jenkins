@@ -28,7 +28,6 @@
 
 + Adaptabilidad
 + Entrega rápida de software funcional
-+ Poca o nula planificación
 + Flexibilidad para los desarrolladores
 + Promueve el trabajo en equipo y la capacitación
 
@@ -53,7 +52,6 @@
 + Enviar las modificaciones del software
 + Automatizar la compilación del software o su despliegue
 + Notificar debidamente a los desarrolladores o al equipo de errores
-+ Generar o visualizar la documentación de un proyecto
 
 ### PIPELINES
 
