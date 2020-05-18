@@ -6,29 +6,29 @@ pipeline {
 	                echo 'Compilando codigo de mi aplicacion'
 	            }
 	        }
-	        stage('Test') {
-		 parallel {
-		    stage('test en windows'){
-	              steps {
-	                sh'''
-			bash ./scripts/helloworld.sh
-			'''
-	              }
-		    }
-		    stage('test en linux'){
-                      steps {
-                        sh'''
-                        bash ./scripts/helloworld.sh
-                        '''
-                      }
-                    }
+                stage('Testing'){
+		  parallel {
+			  stage('Test on windows'){
+				  steps{
+					sh '''
+					  bash scripts/hellworld.sh
+					'''
+				  }
+			  }
+			  stage('Test on IOS'){
+				  steps{
+					sh '''
+					  bash scripts/helloworld.sh
+					'''
+				  }
+			  }
+		  }
 	        }
-	     }
-             stage('Deploy production') {
+		stage('Deploy production') {
 	            steps {
 	                input message: "deploy en producion?"
 	                echo 'deploy'
+	            	}
 	            }
-	        }
-	 }
+ 	 }
 }
