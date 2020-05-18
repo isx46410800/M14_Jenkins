@@ -50,7 +50,7 @@ pipeline {
 			  }
 		  }
 	  }
-	  stage('Comprobamos...'){
+	  stage('Testing'){
 		  parallel {
 			  stage('Comprobamos apache1'){
 				  steps{
@@ -84,7 +84,7 @@ pipeline {
             '''
           }
       }
-      stage('Paramos...'){
+      stage('Stopping'){
 		  parallel {
 			  stage('Paramos el container1'){
 				  steps{
