@@ -42,7 +42,7 @@ pipeline {
               }
           }
       }
-      stage('Deploy test app en docker'){
+      stage('Testing'){
           parallel {
               stage('Test On Windows') {
                         agent {
@@ -73,7 +73,7 @@ pipeline {
               }
           }
       }
-	  stage('Deploy producción app en docker'){
+	  stage('Deploy test production app en docker'){
           parallel {
               stage('Deploy On Windows') {
                         agent {
@@ -111,7 +111,7 @@ pipeline {
             '''
           }
       }
-      stage('Production'){
+      stage('Deploy Production'){
           steps{
             sh '''
               echo "App Hello World en fase de producción!!"
