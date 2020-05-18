@@ -11,7 +11,7 @@ pipeline {
 			  stage('Test on windows'){
 				  steps{
 					sh '''
-					  bash scripts/hellworld.sh
+					  bash scripts/helloworld.sh
 					'''
 				  }
 			  }
